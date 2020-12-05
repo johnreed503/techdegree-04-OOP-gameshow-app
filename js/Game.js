@@ -30,7 +30,8 @@
     this.activePhrase = randomPhrase
     console.log(this.activePhrase)
     //todo_having trouble adding the phraseToDisplay
-    addPhraseToDisplay()
+    let currentPhrase = new Phrase(this.activePhrase.phrase)
+    currentPhrase.addPhraseToDisplay()
   };
 
  }

@@ -13,7 +13,7 @@
   addPhraseToDisplay() {
     const listArea = document.querySelector('phrase, ul')
     let html = ''
-    let str = this.phrase.phrase
+    let str = this.phrase
     for (let i = 0; i < str.length; i++) {
         if (str[i] === ' '){
           html += `<li class="space"> </li>`
