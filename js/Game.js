@@ -16,7 +16,21 @@
   getRandomPhrase() {
     let randomPhraseIndex = Math.floor((Math.random() * this.phrases.length));
     let randomPhrase = this.phrases[randomPhraseIndex]
+    console.log(randomPhrase)
     return randomPhrase
+  };
+
+  /**
+ * Begins game by selecting a random phrase and displaying it to user
+ */
+  startGame() {
+    let screenOverlay = document.getElementById('overlay')
+    screenOverlay.style.visibility = 'hidden'
+    let randomPhrase = this.getRandomPhrase()
+    this.activePhrase = randomPhrase
+    console.log(this.activePhrase)
+    //todo_having trouble adding the phraseToDisplay
+    addPhraseToDisplay()
   };
 
  }
