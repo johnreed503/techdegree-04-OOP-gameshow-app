@@ -16,7 +16,6 @@
   getRandomPhrase() {
     let randomPhraseIndex = Math.floor((Math.random() * this.phrases.length));
     let randomPhrase = this.phrases[randomPhraseIndex]
-    console.log(randomPhrase)
     return randomPhrase
   };
 
@@ -28,10 +27,22 @@
     screenOverlay.style.visibility = 'hidden'
     let randomPhrase = this.getRandomPhrase()
     this.activePhrase = randomPhrase
-    console.log(this.activePhrase)
-    //todo_having trouble adding the phraseToDisplay
     let currentPhrase = new Phrase(this.activePhrase.phrase)
     currentPhrase.addPhraseToDisplay()
   };
+
+//TODO
+  handleInteraction() {
+    let keys = document.querySelectorAll('key')
+    keys.addEventListener('click', (event) => {
+        console.log('Hello from inside the event listener')
+        let key = event.target.innerHTML
+        console.log(key)
+        let currentPhrase = new Phrase(this.activePhrase.phrase)
+        currentPhrase.checkLetter(key)
+    })
+  }
+
+
 
  }

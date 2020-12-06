@@ -24,7 +24,16 @@
     listArea.innerHTML = html
   };
 
-
+  /**
+  * Checks if passed letter is in phrase
+  * @param (string) letter - Letter to check */
+  checkLetter(letter) {
+    if (this.phrase.includes(letter)){
+      return true
+    } else {
+      false
+    }
+  };
 
 
  }
