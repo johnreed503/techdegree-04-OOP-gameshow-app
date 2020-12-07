@@ -26,9 +26,9 @@
     let screenOverlay = document.getElementById('overlay')
     screenOverlay.style.visibility = 'hidden'
     let randomPhrase = this.getRandomPhrase()
-    this.activePhrase = randomPhrase
-    let currentPhrase = new Phrase(this.activePhrase.phrase)
+    let currentPhrase = new Phrase(randomPhrase.phrase)
     currentPhrase.addPhraseToDisplay()
+    this.activePhrase = currentPhrase
   };
 
 //TODO

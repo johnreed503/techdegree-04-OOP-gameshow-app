@@ -31,9 +31,25 @@
     if (this.phrase.includes(letter)){
       return true
     } else {
-      false
+      return false
     }
   };
+
+  /**
+  * Displays passed letter on screen after a match is found * @param (string) letter - Letter to display
+  */
+  showMatchedLetter(letter) {
+    const listArea = document.querySelectorAll('phrase, li')
+    for (let i = 0; i < listArea.length; i ++){
+      if (listArea[i].innerHTML === letter) {
+        listArea[i].className = `show`
+      }
+    }
+
+  };
+
+
+
 
 
  }
