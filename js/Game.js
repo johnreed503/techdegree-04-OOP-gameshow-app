@@ -35,13 +35,89 @@
   handleInteraction() {
     let keys = document.querySelectorAll('key')
     keys.addEventListener('click', (event) => {
-        console.log('Hello from inside the event listener')
         let key = event.target.innerHTML
-        console.log(key)
         let currentPhrase = new Phrase(this.activePhrase.phrase)
         currentPhrase.checkLetter(key)
     })
   }
+
+  /**
+   * Checks for winning move
+   * @return {boolean} True if game has been won, false if game wasn't
+  won */
+  checkForWin() {
+    const letters = document.querySelectorAll('.phrase, li')
+    for (let i = 0; i < letters.length; i++) {
+      if (letters[i].className !== 'show'){
+        return false
+      } else {
+        return true
+      }
+    }
+  };
+
+  /**
+  * Displays game over message
+  * @param {boolean} gameWon - Whether or not the user won the game */
+  gameOver(gameWon) {
+    let screenOverlay = document.getElementById('overlay')
+    screenOverlay.style.visibility = 'visible'
+    let h1 = document.getElementById('game-over-message')
+    if (gameWon === true) {
+      screenOverlay.class = 'win'
+      h1.innerHTML = 'Great Job!'
+    } else {
+      screenOverlay.class = 'lose'
+      h1.innerHTML = 'Better luck next time!'
+    }
+  };
+  /**
+ * Increases the value of the missed property
+ * Removes a life from the scoreboard
+ * Checks if player has remaining lives and ends game if player is out
+ */
+// removeLife() {
+//   this.missed ++
+//   const lives = document.querySelectorAll('.tries')
+//   for (let i = 0; i < lives.length; i++) {
+//     if (lives[i].innerHTML === '<img src="images/liveHeart.png" alt="Heart Icon" height="35" width="30">') {
+//       lives[i].innerHTML = '<img src="images/lostHeart.png" alt="Heart Icon" height="35" width="30">'
+//       return
+//     }
+//   }
+//   return gameOver(false)
+// };
+
+removeLife() {
+  this.missed ++
+  const lives = document.querySelectorAll('.tries')
+  if (this.missed === 5) {
+    this.gameOver(false)
+  } else {
+    for (let i = 0; i < lives.length; i++){
+      if (lives[i].innerHTML === '<img src="images/liveHeart.png" alt="Heart Icon" height="35" width="30">') {
+        lives[i].innerHTML = '<img src="images/lostHeart.png" alt="Heart Icon" height="35" width="30">'
+        return
+    }
+}
+}
+};
+
+// /**
+// * Displays game over message
+// * @param {boolean} gameWon - Whether or not the user won the game */
+// gameOver(gameWon) {
+//   let screenOverlay = document.getElementById('overlay')
+//   screenOverlay.style.visibility = 'visible'
+//   let h1 = document.getElementById('game-over-message')
+//   if (gameWon === true) {
+//     screenOverlay.class = 'win'
+//     h1.innerHTML = 'Great Job!'
+//   } else {
+//     screenOverlay.class = 'lose'
+//     h1.innerHTML = 'Better luck next time!'
+//   }
+// };
 
 
 
