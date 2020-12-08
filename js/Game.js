@@ -27,13 +27,14 @@
  * Begins game by selecting a random phrase and displaying it to user
  */
   startGame() {
+    this.missed = 0
     let screenOverlay = document.getElementById('overlay')
     screenOverlay.style.visibility = 'hidden'
     let randomPhrase = this.getRandomPhrase()
     let currentPhrase = new Phrase(randomPhrase.phrase)
     currentPhrase.addPhraseToDisplay()
     this.activePhrase = currentPhrase
-    //TODO: reset the hearts
+    //reset the hearts
     const lives = document.querySelectorAll('.tries')
     for (let i = 0; i < lives.length; i++){
       lives[i].innerHTML = '<img src="images/liveHeart.png" alt="Heart Icon" height="35" width="30">'
@@ -54,18 +55,11 @@
   //   }
   // };
   checkForWin() {
-    const letters = document.querySelectorAll('.phrase, li')
-    let counter = 0
-    for (let i = 0; i < letters.length; i++) {
-      console.log(letters[i].className)
-      if (letters[i].className !== 'show'){
-        counter ++
-      }
-    }
-    if (counter > 0) {
-      return false
-    } else {
+    const letters = document.querySelectorAll('.space, .hide')
+    if (letters.length === 0){
       return true
+    } else {
+      return false
     }
   };
 
@@ -107,7 +101,7 @@ removeLife() {
 
 //TODO
   handleInteraction(button) {
-    console.log(this.checkforWin())
+    //console.log(this.checkForWin())
     let currentPhrase = new Phrase(this.activePhrase.phrase)
     if (currentPhrase.checkLetter(button) === true){
       currentPhrase.showMatchedLetter(button)
