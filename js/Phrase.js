@@ -40,7 +40,6 @@
   */
   showMatchedLetter(letter) {
     const listArea = document.querySelectorAll('.phrase, li')
-    console.log(listArea)
     for (let i = 0; i < listArea.length; i ++){
       if (listArea[i].innerHTML === letter) {
         listArea[i].className = `show`

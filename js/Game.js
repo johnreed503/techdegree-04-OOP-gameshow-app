@@ -5,7 +5,11 @@
  class Game {
    constructor(){
      this.missed = 0
-     this.phrases =   [{'phrase' : 'test phrase one'}, {'phrase': 'test phrase two'}]
+     this.phrases =   [
+       {'phrase' : 'o'},
+       {'phrase' : 'two'},
+       {'phrase' : 'three'}
+     ]
      this.activePhrase = null
    }
 
@@ -29,17 +33,12 @@
     let currentPhrase = new Phrase(randomPhrase.phrase)
     currentPhrase.addPhraseToDisplay()
     this.activePhrase = currentPhrase
+    //TODO: reset the hearts
+    const lives = document.querySelectorAll('.tries')
+    for (let i = 0; i < lives.length; i++){
+      lives[i].innerHTML = '<img src="images/liveHeart.png" alt="Heart Icon" height="35" width="30">'
+    }
   };
-
-//TODO
-  handleInteraction() {
-    let keys = document.querySelectorAll('key')
-    keys.addEventListener('click', (event) => {
-        let key = event.target.innerHTML
-        let currentPhrase = new Phrase(this.activePhrase.phrase)
-        currentPhrase.checkLetter(key)
-    })
-  }
 
   /**
    * Checks for winning move
@@ -76,17 +75,6 @@
  * Removes a life from the scoreboard
  * Checks if player has remaining lives and ends game if player is out
  */
-// removeLife() {
-//   this.missed ++
-//   const lives = document.querySelectorAll('.tries')
-//   for (let i = 0; i < lives.length; i++) {
-//     if (lives[i].innerHTML === '<img src="images/liveHeart.png" alt="Heart Icon" height="35" width="30">') {
-//       lives[i].innerHTML = '<img src="images/lostHeart.png" alt="Heart Icon" height="35" width="30">'
-//       return
-//     }
-//   }
-//   return gameOver(false)
-// };
 
 removeLife() {
   this.missed ++
@@ -103,21 +91,18 @@ removeLife() {
 }
 };
 
-// /**
-// * Displays game over message
-// * @param {boolean} gameWon - Whether or not the user won the game */
-// gameOver(gameWon) {
-//   let screenOverlay = document.getElementById('overlay')
-//   screenOverlay.style.visibility = 'visible'
-//   let h1 = document.getElementById('game-over-message')
-//   if (gameWon === true) {
-//     screenOverlay.class = 'win'
-//     h1.innerHTML = 'Great Job!'
-//   } else {
-//     screenOverlay.class = 'lose'
-//     h1.innerHTML = 'Better luck next time!'
-//   }
-// };
+//TODO
+  handleInteraction(key) {
+    let currentPhrase = new Phrase(this.activePhrase.phrase)
+    if (currentPhrase.checkLetter(key) === true){
+      currentPhrase.showMatchedLetter(key)
+    } else {
+      this.removeLife()
+    }
+    if (this.checkForWin() === true) {
+      this.gameOver(true)
+    }
+  }
 
 
 
