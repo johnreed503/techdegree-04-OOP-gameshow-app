@@ -6,7 +6,7 @@
    constructor(){
      this.missed = 0
      this.phrases =   [
-       {'phrase' : 'o'},
+       {'phrase' : 't'},
        {'phrase' : 'two'},
        {'phrase' : 'three'}
      ]
@@ -44,14 +44,28 @@
    * Checks for winning move
    * @return {boolean} True if game has been won, false if game wasn't
   won */
+  // checkForWin() {
+  //   const letters = document.querySelectorAll('.phrase, li')
+  //   for (let i = 0; i < letters.length; i++) {
+  //     if (letters[i].className !== 'show'){
+  //       return false
+  //     }
+  //   return true
+  //   }
+  // };
   checkForWin() {
     const letters = document.querySelectorAll('.phrase, li')
+    let counter = 0
     for (let i = 0; i < letters.length; i++) {
+      console.log(letters[i].className)
       if (letters[i].className !== 'show'){
-        return false
-      } else {
-        return true
+        counter ++
       }
+    }
+    if (counter > 0) {
+      return false
+    } else {
+      return true
     }
   };
 
@@ -92,10 +106,11 @@ removeLife() {
 };
 
 //TODO
-  handleInteraction(key) {
+  handleInteraction(button) {
+    console.log(this.checkforWin())
     let currentPhrase = new Phrase(this.activePhrase.phrase)
-    if (currentPhrase.checkLetter(key) === true){
-      currentPhrase.showMatchedLetter(key)
+    if (currentPhrase.checkLetter(button) === true){
+      currentPhrase.showMatchedLetter(button)
     } else {
       this.removeLife()
     }

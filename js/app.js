@@ -2,7 +2,7 @@
  * Project 4 - OOP Game App
  * app.js */
 
- //TODO 
+ //TODO
  //CHANGED
  //FIXME
  let game
@@ -11,3 +11,16 @@
    game = new Game()
    game.startGame()
  })
+
+ const keys = document.getElementById('qwerty')
+ keys.addEventListener('click', (event) => {
+   if (event.target.className === 'key') {
+     game.handleInteraction(event.target.innerHTML)
+   }
+ })
+
+ // let buttons = document.querySelectorAll('.key')
+ // console.log(buttons)
+ // buttons.addEventListener('click', (event) => {
+ //   console.log(event.class)
+ // })
