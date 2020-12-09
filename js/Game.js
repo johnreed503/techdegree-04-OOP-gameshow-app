@@ -27,6 +27,18 @@
  * Begins game by selecting a random phrase and displaying it to user
  */
   startGame() {
+    //todo fix this reset somehow to be more elegant and not flash what its doing
+    const wrongKeyReset = document.querySelectorAll('.wrong')
+    for (let i = 0; i < wrongKeyReset.length; i++) {
+      wrongKeyReset[i].className = 'key'
+      wrongKeyReset[i].disabled = false
+    }
+    const chosenKeyReset = document.querySelectorAll('.chosen')
+    for (let i = 0; i < chosenKeyReset.length; i++) {
+      chosenKeyReset[i].className = 'key'
+      chosenKeyReset[i].disabled = false
+    }
+
     this.missed = 0
     let screenOverlay = document.getElementById('overlay')
     screenOverlay.style.visibility = 'hidden'
@@ -45,15 +57,6 @@
    * Checks for winning move
    * @return {boolean} True if game has been won, false if game wasn't
   won */
-  // checkForWin() {
-  //   const letters = document.querySelectorAll('.phrase, li')
-  //   for (let i = 0; i < letters.length; i++) {
-  //     if (letters[i].className !== 'show'){
-  //       return false
-  //     }
-  //   return true
-  //   }
-  // };
   checkForWin() {
     const letters = document.querySelectorAll('.space, .hide')
     if (letters.length === 0){
@@ -77,6 +80,8 @@
       screenOverlay.class = 'lose'
       h1.innerHTML = 'Better luck next time!'
     }
+
+
   };
   /**
  * Increases the value of the missed property
@@ -101,12 +106,16 @@ removeLife() {
 
 //TODO
   handleInteraction(button) {
-    //console.log(this.checkForWin())
+    button.disabled = true
     let currentPhrase = new Phrase(this.activePhrase.phrase)
-    if (currentPhrase.checkLetter(button) === true){
-      currentPhrase.showMatchedLetter(button)
+    if (currentPhrase.checkLetter(button.innerHTML) === true){
+      currentPhrase.showMatchedLetter(button.innerHTML)
+      //todo
+      button.className += ', chosen'
     } else {
       this.removeLife()
+      //todo
+      button.className += ', wrong'
     }
     if (this.checkForWin() === true) {
       this.gameOver(true)
