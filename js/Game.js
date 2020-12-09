@@ -76,9 +76,12 @@
     if (gameWon === true) {
       screenOverlay.class = 'win'
       h1.innerHTML = 'Great Job!'
+      //// TODO: change color to bright blue
+      
     } else {
       screenOverlay.class = 'lose'
       h1.innerHTML = 'Better luck next time!'
+      //// TODO: change color to orange
     }
 
 
