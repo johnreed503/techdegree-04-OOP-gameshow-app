@@ -7,9 +7,7 @@
      this.phrase = phrase.toLowerCase()
    }
 
-  /**
-   * Display phrase on game board
-  */
+  //displays hidden phrase on board
   addPhraseToDisplay() {
     const listArea = document.querySelector('phrase, ul')
     let html = ''
@@ -23,10 +21,7 @@
     }
     listArea.innerHTML = html
   };
-
-  /**
-  * Checks if passed letter is in phrase
-  * @param (string) letter - Letter to check */
+  //checks if letter is included in phrase
   checkLetter(letter) {
     if (this.phrase.includes(letter)){
       return true
@@ -34,10 +29,7 @@
       return false
     }
   };
-
-  /**
-  * Displays passed letter on screen after a match is found * @param (string) letter - Letter to display
-  */
+  //shows letter if matched
   showMatchedLetter(letter) {
     const listArea = document.querySelectorAll('.phrase, li')
     for (let i = 0; i < listArea.length; i ++){
@@ -45,11 +37,5 @@
         listArea[i].className = `show`
       }
     }
-
   };
-
-
-
-
-
  }

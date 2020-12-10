@@ -2,9 +2,7 @@
  * Project 4 - OOP Game App
  * app.js */
 
- //TODO
- //CHANGED
- //FIXME
+//instantiates a new game object and starts the game
  let game
  let resetButton = document.getElementById('btn__reset')
  resetButton.addEventListener('click', (event) => {
@@ -12,6 +10,7 @@
    game.startGame()
  })
 
+//listens for mouse clicks on the onscreen keyboard
  const keys = document.getElementById('qwerty')
  keys.addEventListener('click', (event) => {
    if (event.target.className === 'key') {
@@ -19,26 +18,19 @@
    }
  })
 
-
 //listens for letters from the keyboard
  document.addEventListener('keyup', (event) => {
+   let alphabet = 'abcdefghijklmnopqrstuvwxyz'
+   if (alphabet.includes(event.key)) {
    let transformed
    let letters = document.querySelectorAll('button')
-   //console.log(letters)
    for (let i = 0; i < letters.length; i++) {
      if (letters[i].innerHTML === event.key) {
        transformed = letters[i]
      }
    }
-   //console.log(transformed)
    if (transformed.disabled === false) {
      game.handleInteraction(transformed)
-     //console.log(letters)
    }
+ }
  })
-
- // let buttons = document.querySelectorAll('.key')
- // console.log(buttons)
- // buttons.addEventListener('click', (event) => {
- //   console.log(event.class)
- // })

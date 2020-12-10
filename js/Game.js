@@ -6,26 +6,25 @@
    constructor(){
      this.missed = 0
      this.phrases =   [
-       {'phrase' : 't'},
-       {'phrase' : 'two'},
-       {'phrase' : 'three'}
+       // {'phrase' : 'One'},
+       // {'phrase' : 'Two'}
+       {'phrase' : 'Raining Cats And Dogs'},
+       {'phrase' : 'Let The Cat Out Of The Bag'},
+       {'phrase' : 'Hold Your Horses'},
+       {'phrase' : 'Long In The Tooth'},
+       {'phrase' : 'Crocodile Tears'}
      ]
      this.activePhrase = null
    }
 
-   /**
- * Selects random phrase from phrases property
- * @return {Object} Phrase object chosen to be used
- */
+//selects random phrase
   getRandomPhrase() {
     let randomPhraseIndex = Math.floor((Math.random() * this.phrases.length));
     let randomPhrase = this.phrases[randomPhraseIndex]
     return randomPhrase
   };
 
-  /**
- * Begins game by selecting a random phrase and displaying it to user
- */
+//starts game
   startGame() {
     //todo fix this reset somehow to be more elegant and not flash what its doing
     const wrongKeyReset = document.querySelectorAll('.wrong')
@@ -38,7 +37,6 @@
       chosenKeyReset[i].className = 'key'
       chosenKeyReset[i].disabled = false
     }
-
     this.missed = 0
     let screenOverlay = document.getElementById('overlay')
     screenOverlay.style.visibility = 'hidden'
@@ -53,12 +51,9 @@
     }
   };
 
-  /**
-   * Checks for winning move
-   * @return {boolean} True if game has been won, false if game wasn't
-  won */
+  //checks for win, returns boolean value
   checkForWin() {
-    const letters = document.querySelectorAll('.space, .hide')
+    const letters = document.querySelectorAll('.hide')
     if (letters.length === 0){
       return true
     } else {
@@ -66,32 +61,25 @@
     }
   };
 
-  /**
-  * Displays game over message
-  * @param {boolean} gameWon - Whether or not the user won the game */
+//displays game over message based on boolean value of checkForWin()
   gameOver(gameWon) {
     let screenOverlay = document.getElementById('overlay')
     screenOverlay.style.visibility = 'visible'
     let h1 = document.getElementById('game-over-message')
     if (gameWon === true) {
-      screenOverlay.class = 'win'
+      console.log(screenOverlay.className)
+      screenOverlay.className = 'win'
       h1.innerHTML = 'Great Job!'
-      //// TODO: change color to bright blue
-      
+      h1.style.fontSize = '60px';
     } else {
-      screenOverlay.class = 'lose'
+      screenOverlay.className = 'lose'
       h1.innerHTML = 'Better luck next time!'
-      //// TODO: change color to orange
+      h1.style.fontSize = '30px';
     }
 
 
   };
-  /**
- * Increases the value of the missed property
- * Removes a life from the scoreboard
- * Checks if player has remaining lives and ends game if player is out
- */
-
+  //removes live from scoreboard, calls gameOver if no lives remaining
 removeLife() {
   this.missed ++
   const lives = document.querySelectorAll('.tries')
@@ -106,25 +94,21 @@ removeLife() {
 }
 }
 };
-
-//TODO
+//TODO handles interactions from event listeners in app.js
   handleInteraction(button) {
     button.disabled = true
     let currentPhrase = new Phrase(this.activePhrase.phrase)
     if (currentPhrase.checkLetter(button.innerHTML) === true){
       currentPhrase.showMatchedLetter(button.innerHTML)
-      //todo
       button.className += ', chosen'
     } else {
       this.removeLife()
-      //todo
       button.className += ', wrong'
     }
     if (this.checkForWin() === true) {
       this.gameOver(true)
     }
   }
-
 
 
  }
