@@ -5,14 +5,12 @@
  class Game {
    constructor(){
      this.missed = 0
-     this.phrases =   [
-       // {'phrase' : 'One'},
-       // {'phrase' : 'Two'}
-       {'phrase' : 'Raining Cats And Dogs'},
-       {'phrase' : 'Let The Cat Out Of The Bag'},
-       {'phrase' : 'Hold Your Horses'},
-       {'phrase' : 'Long In The Tooth'},
-       {'phrase' : 'Crocodile Tears'}
+     this.phrases = [
+       new Phrase('Raining Cats And Dogs'),
+       new Phrase('Let The Cat Out Of The Bag'),
+       new Phrase('Hold Your Horses'),
+       new Phrase('Long In The Tooth'),
+       new Phrase('Crocodile Tears')
      ]
      this.activePhrase = null
    }
@@ -41,7 +39,7 @@
     let screenOverlay = document.getElementById('overlay')
     screenOverlay.style.visibility = 'hidden'
     let randomPhrase = this.getRandomPhrase()
-    let currentPhrase = new Phrase(randomPhrase.phrase)
+    let currentPhrase = randomPhrase
     currentPhrase.addPhraseToDisplay()
     this.activePhrase = currentPhrase
     //reset the hearts
@@ -67,7 +65,6 @@
     screenOverlay.style.visibility = 'visible'
     let h1 = document.getElementById('game-over-message')
     if (gameWon === true) {
-      console.log(screenOverlay.className)
       screenOverlay.className = 'win'
       h1.innerHTML = 'Great Job!'
       h1.style.fontSize = '60px';
